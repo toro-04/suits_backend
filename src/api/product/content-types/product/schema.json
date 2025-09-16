@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Description": {
+      "type": "richtext",
+      "required": true
+    },
+    "Base_Price": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "Available_Color": {
+      "type": "json",
+      "required": false
+    },
+    "Available_sizes": {
+      "type": "json",
+      "required": false
+    },
+    "Customizable": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "Whatsapp_message": {
+      "type": "string",
+      "required": false
+    },
+    "Images": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    }
+  }
+}
