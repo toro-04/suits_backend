@@ -1,13 +1,12 @@
-export default ({ env }: { env: any }) => ({
+export default ({ env }) => ({
   connection: {
     client: 'postgres',
     connection: {
-      host: env('PGHOST', 'localhost'),
-      port: env.int('PGPORT', 5432),
-      database: env('PGDATABASE', 'railway'),
-      user: env('PGUSER', 'postgres'),
-      password: env('PGPASSWORD', ''),
-      ssl: env.bool('DATABASE_SSL', false),
+      connectionString: env('DATABASE_URL'),
+      ssl: {
+        rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', false),
+      },
     },
+    debug: false,
   },
 });
