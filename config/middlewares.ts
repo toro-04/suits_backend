@@ -2,7 +2,14 @@ export default [
   'strapi::logger',
   'strapi::errors',
   'strapi::security',
-  'strapi::cors',
+  {
+    name: 'strapi::cors',
+    config: {
+      origin: ['http://localhost:5174', 'http://localhost:3000'], // Add your React dev server URL
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+    },
+  },
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
