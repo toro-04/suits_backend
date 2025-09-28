@@ -8,19 +8,8 @@ export default [
         useDefaults: true,
         directives: {
           'connect-src': ["'self'", 'https:'],
-          'img-src': [
-            "'self'", 
-            'data:', 
-            'blob:', 
-            'market-assets.strapi.io',
-            'https://suitsbackend-production.up.railway.app'
-          ],
-          'media-src': [
-            "'self'", 
-            'data:', 
-            'blob:',
-            'https://suitsbackend-production.up.railway.app'
-          ],
+          'img-src': ["'self'", 'data:', 'blob:', '*'],
+          'media-src': ["'self'", 'data:', 'blob:', '*'],
           upgradeInsecureRequests: null,
         },
       },
@@ -29,9 +18,12 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      origin: '*', // Allow all origins temporarily for images
+      enabled: true,
+      header: '*',
+      origin: '*',
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
-      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With', 'Access-Control-Request-Method', 'Access-Control-Request-Headers'],
+      keepHeaderOnError: true,
     },
   },
   'strapi::poweredBy',
@@ -39,5 +31,11 @@ export default [
   'strapi::body',
   'strapi::session',
   'strapi::favicon',
-  'strapi::public',
+  {
+    name: 'strapi::public',
+    config: {
+      maxAge: 60000,
+      defer: false,
+    },
+  },
 ];
