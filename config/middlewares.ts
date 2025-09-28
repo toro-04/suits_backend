@@ -1,7 +1,20 @@
 export default [
   'strapi::logger',
   'strapi::errors',
-  'strapi::security',
+  {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'connect-src': ["'self'", 'https:'],
+          'img-src': ["'self'", 'data:', 'blob:', 'https://suitsbackend-production.up.railway.app'], // Add your Railway domain
+          'media-src': ["'self'", 'data:', 'blob:', 'https://suitsbackend-production.up.railway.app'],
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
   {
     name: 'strapi::cors',
     config: {
@@ -11,8 +24,8 @@ export default [
         'http://localhost:5173',
         'https://suits-frontend-git-main-toro-04s-projects.vercel.app',
         'https://suits-frontend-toro-04s-projects.vercel.app',
-        'https://suits-frontend-omega.vercel.app', // Your new domain
-        'https://suits-frontend.vercel.app' // In case you get this one too
+        'https://suits-frontend-omega.vercel.app',
+        'https://suits-frontend.vercel.app'
       ], 
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
@@ -24,5 +37,10 @@ export default [
   'strapi::body',
   'strapi::session',
   'strapi::favicon',
-  'strapi::public',
+  {
+    name: 'strapi::public',
+    config: {
+      defer: false, // Make sure static files are served with CORS headers
+    },
+  },
 ];
