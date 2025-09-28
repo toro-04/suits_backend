@@ -1,5 +1,4 @@
 export default [
-  'strapi::logger',
   'strapi::errors',
   {
     name: 'strapi::security',
@@ -8,8 +7,20 @@ export default [
         useDefaults: true,
         directives: {
           'connect-src': ["'self'", 'https:'],
-          'img-src': ["'self'", 'data:', 'blob:', '*'],
-          'media-src': ["'self'", 'data:', 'blob:', '*'],
+          'img-src': [
+            "'self'",
+            'data:',
+            'blob:',
+            'market-assets.strapi.io',
+            'suitsbackend-production.up.railway.app',
+          ],
+          'media-src': [
+            "'self'",
+            'data:',
+            'blob:',
+            'market-assets.strapi.io',
+            'suitsbackend-production.up.railway.app',
+          ],
           upgradeInsecureRequests: null,
         },
       },
@@ -19,23 +30,21 @@ export default [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      header: '*',
-      origin: '*',
+      origin: [
+        'http://localhost:5173',
+        'https://suits-frontend-omega.vercel.app',
+        'https://suits-frontend-toro-04s-projects.vercel.app'
+      ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
-      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With', 'Access-Control-Request-Method', 'Access-Control-Request-Headers'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
       keepHeaderOnError: true,
     },
   },
   'strapi::poweredBy',
+  'strapi::logger',
   'strapi::query',
   'strapi::body',
   'strapi::session',
   'strapi::favicon',
-  {
-    name: 'strapi::public',
-    config: {
-      maxAge: 60000,
-      defer: false,
-    },
-  },
+  'strapi::public',
 ];
