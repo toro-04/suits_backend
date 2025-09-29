@@ -46,23 +46,17 @@ export default [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      origin: function (ctx) {
-        const origin = ctx.request.header.origin;
-        const allowedOrigins = [
-          'http://localhost:5173',
-          'https://suits-frontend-toro-04s-projects.vercel.app',
-          'https://suitsbackend-production.up.railway.app',
-          'suits-frontend-git-main-toro-04s-projects.vercel.app',
-          'https://suits-frontend-h9v0qu87j-toro-04s-projects.vercel.app',
-          'https://suits-frontend-git-main-toro-04s-projects.vercel.app',
-          'https://navkiran-suits.vercel.app/',
-        ];
-        
-        if (allowedOrigins.includes(origin)) {
-          return origin;
-        }
-        return allowedOrigins[0]; // fallback
-      },
+      origin: [
+        'http://localhost:5173',
+        'https://suits-frontend-toro-04s-projects.vercel.app',
+        'https://suitsbackend-production.up.railway.app',
+        'https://suits-frontend-git-main-toro-04s-projects.vercel.app',
+        'https://suits-frontend-h9v0qu87j-toro-04s-projects.vercel.app',
+        'https://navkiran-suits.vercel.app',
+        // Add wildcard patterns for Vercel preview deployments
+        /^https:\/\/suits-frontend-.*\.vercel\.app$/,
+        /^https:\/\/navkiran-suits-.*\.vercel\.app$/
+      ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       headers: [
         'Content-Type', 
