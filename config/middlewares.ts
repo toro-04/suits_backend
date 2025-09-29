@@ -50,13 +50,12 @@ export default [
         const origin = ctx.request.header.origin;
         const allowedOrigins = [
           'http://localhost:5173',
-          'https://suits-frontend-omega.vercel.app',
           'https://suits-frontend-toro-04s-projects.vercel.app',
           'https://suitsbackend-production.up.railway.app',
           'suits-frontend-git-main-toro-04s-projects.vercel.app',
           'https://suits-frontend-h9v0qu87j-toro-04s-projects.vercel.app',
           'https://suits-frontend-git-main-toro-04s-projects.vercel.app',
-          'https://navkiran-suits.vercel.app/'
+          'https://navkiran-suits.vercel.app/',
         ];
         
         if (allowedOrigins.includes(origin)) {
