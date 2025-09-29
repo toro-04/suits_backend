@@ -82,5 +82,11 @@ export default [
   'strapi::body',
   'strapi::session',
   'strapi::favicon',
-  'strapi::public',
+  {
+    name: 'strapi::public',
+    config: {
+      path: './public',
+      maxAge: 60000 * 60 * 24 * 30, // 30 days cache
+    },
+  },
 ];
